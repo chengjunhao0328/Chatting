@@ -170,7 +170,7 @@ PORT=8080 python app.py
 
 本项目由作者与 AI 编程助手协作完成：
 
-- **人类作者**：[@Junhao Cheng](https://github.com/junhaocheng) — 负责项目规划、架构设计、功能定义、代码审查及集成测试。
+- **人类作者**：[@Junhao Cheng](https://github.com/chengjunhao0328) — 负责项目规划、架构设计、功能定义、代码审查及集成测试。
 - **AI 助手（DeepSeek-V4-Flash）**：提供代码生成、实现建议及开发过程中的问题排查。
 - **AI 工具（Claude Code）**：辅助代码编辑、文件管理和开发流程。
 

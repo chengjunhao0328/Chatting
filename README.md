@@ -172,7 +172,7 @@ The author and contributors assume no liability for any misuse of this software 
 
 This project was built collaboratively between the author and AI programming assistants:
 
-- **Human Author**: [@Junhao Cheng](https://github.com/junhaocheng) — responsible for project planning, architecture design, feature specification, code review, and integration testing.
+- **Human Author**: [@Junhao Cheng](https://github.com/chengjunhao0328) — responsible for project planning, architecture design, feature specification, code review, and integration testing.
 - **AI Assistant (DeepSeek-V4-Flash)**: Provided code generation, implementation suggestions, and troubleshooting during development.
 - **AI Tool (Claude Code)**: Assisted with code editing, file management, and development workflow.
 
