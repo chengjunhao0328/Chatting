@@ -24,7 +24,7 @@ class Chatting {
             activeConvId: null,
         };
 
-        this.API_BASE = 'http://localhost:5001';
+        this.API_BASE = window.location.origin;
 
         // rAF render batching for streaming
         this._pendingEl = null;
@@ -660,6 +660,7 @@ class Chatting {
             this._renderRaf = requestAnimationFrame(() => {
                 if (this._pendingEl && this._pendingContent !== null) {
                     this._pendingEl.innerHTML = this._renderMD(this._pendingContent);
+                    this._renderLatex(this._pendingEl);
                     this._scrollBottom();
                 }
                 this._renderRaf = null;

@@ -19,8 +19,18 @@ import requests
 from flask import Flask, request, jsonify, Response, stream_with_context, send_from_directory
 from flask_cors import CORS
 
+# Load .env file if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 app = Flask(__name__, static_folder=None)
-CORS(app)
+
+# Allow CORS for API routes; restrict origins in production via env var
+allowed_origins = os.environ.get('CORS_ORIGINS', '*')
+CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 
 # ---------------------------------------------------------------------------
 # Provider configurations
@@ -324,7 +334,7 @@ def _proxy_anthropic(base_url, api_key, model, messages, system_prompt, stream):
     if not stream:
         try:
             resp = requests.post(base_url, headers=headers, json=payload, timeout=120)
-            return jsonify(resp.json())
+            return jsonify(resp.json()), resp.status_code
         except requests.exceptions.RequestException as e:
             return jsonify({'error': str(e)}), 500
 
@@ -387,7 +397,7 @@ def _proxy_openai(base_url, api_key, model, messages, system_prompt, stream):
     if not stream:
         try:
             resp = requests.post(base_url, headers=headers, json=payload, timeout=120)
-            return jsonify(resp.json())
+            return jsonify(resp.json()), resp.status_code
         except requests.exceptions.RequestException as e:
             return jsonify({'error': str(e)}), 500
 
@@ -516,10 +526,12 @@ def _extract_error(response):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5001))
+    debug = os.environ.get('FLASK_DEBUG', '1').lower() in ('1', 'true', 'yes')
     print()
     print("  Chatting Backend Server")
     print("  " + ("=" * 35))
     print(f"  API:   http://localhost:{port}/api/")
     print(f"  App:   http://localhost:{port}/")
+    print(f"  Debug: {debug}")
     print("  " + ("=" * 35))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=debug)
