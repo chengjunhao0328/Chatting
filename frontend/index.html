@@ -105,6 +105,15 @@
                             <label id="lblApiKey">API Key</label>
                             <input type="password" id="apiKey" placeholder="Enter your API key..." autocomplete="off" spellcheck="false">
                         </div>
+                        <div class="form-group save-key-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="saveApiKey" checked>
+                                <span id="lblSaveKey">Save API Key</span>
+                            </label>
+                            <div class="settings-disclaimer" id="disclaimerSaveKey">
+                                Security Note: The API Key is stored in your browser. The author assumes no responsibility for any leaks.
+                            </div>
+                        </div>
                         <button class="save-btn" id="saveSettings" type="button">Save &amp; Verify</button>
                         <div class="conn-status" id="connStatus">
                             <span class="dot"></span>

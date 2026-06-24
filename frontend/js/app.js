@@ -15,6 +15,7 @@ class Chatting {
             provider: 'anthropic',
             model: 'claude-sonnet-4-20250514',
             apiKey: '',
+            saveApiKey: true,
             lang: 'en',
             messages: [],
             isStreaming: false,
@@ -40,7 +41,7 @@ class Chatting {
                 welcome:   { title: 'Welcome to Chatting', desc: 'Enter your API key in Settings, pick a mode, and start talking to any LLM provider.' },
                 sidebar:   { modes: 'Modes', settings: 'Settings' },
                 mode:      { chat: 'Chat', code: 'Code' },
-                settings:  { language: 'Language', provider: 'API Provider', model: 'Model', apiKey: 'API Key', save: 'Save & Verify' },
+                settings:  { language: 'Language', provider: 'API Provider', model: 'Model', apiKey: 'API Key', save: 'Save & Verify', saveKey: 'Save API Key', disclaimer: 'The API Key is stored in your browser. The author assumes no responsibility for any leaks.' },
                 status:    { notConfigured: 'Not configured', verifying: 'Verifying...', connected: 'Connected', invalidKey: 'Invalid API Key', unreachable: 'Backend unreachable' },
                 msg:       { you: 'You', assistant: 'Assistant', system: 'System' },
                 indicator: { chat: 'Chat mode', code: 'Code mode' },
@@ -54,7 +55,7 @@ class Chatting {
                 welcome:   { title: '欢迎使用 Chatting', desc: '在设置中填入你的 API 密钥，选择模式，即可与各大 LLM 提供商对话。' },
                 sidebar:   { modes: '模式', settings: '设置' },
                 mode:      { chat: '对话', code: '代码' },
-                settings:  { language: '语言', provider: 'API 提供商', model: '模型', apiKey: 'API 密钥', save: '保存并验证' },
+                settings:  { language: '语言', provider: 'API 提供商', model: '模型', apiKey: 'API 密钥', save: '保存并验证', saveKey: '保存 API 密钥', disclaimer: 'API 密钥存储在您的浏览器中，作者不对任何泄露承担责任。' },
                 status:    { notConfigured: '未配置', verifying: '验证中...', connected: '已连接', invalidKey: 'API 密钥无效', unreachable: '无法连接后端' },
                 msg:       { you: '你', assistant: '助手', system: '系统' },
                 indicator: { chat: '对话模式', code: '代码模式' },
@@ -68,7 +69,7 @@ class Chatting {
                 welcome:   { title: '歡迎使用 Chatting', desc: '在設定中填入你的 API 金鑰，選擇模式，即可與各大 LLM 提供者對話。' },
                 sidebar:   { modes: '模式', settings: '設定' },
                 mode:      { chat: '對話', code: '程式碼' },
-                settings:  { language: '語言', provider: 'API 提供者', model: '模型', apiKey: 'API 金鑰', save: '儲存並驗證' },
+                settings:  { language: '語言', provider: 'API 提供者', model: '模型', apiKey: 'API 金鑰', save: '儲存並驗證', saveKey: '儲存 API 金鑰', disclaimer: 'API 金鑰儲存在您的瀏覽器中，作者不對任何洩漏承擔責任。' },
                 status:    { notConfigured: '未設定', verifying: '驗證中...', connected: '已連線', invalidKey: 'API 金鑰無效', unreachable: '無法連線後端' },
                 msg:       { you: '你', assistant: '助手', system: '系統' },
                 indicator: { chat: '對話模式', code: '程式碼模式' },
@@ -82,7 +83,7 @@ class Chatting {
                 welcome:   { title: 'Bienvenue sur Chatting', desc: 'Configurez votre cle API dans les parametres, choisissez un mode et commencez a discuter avec n importe quel fournisseur LLM.' },
                 sidebar:   { modes: 'Modes', settings: 'Parametres' },
                 mode:      { chat: 'Discussion', code: 'Code' },
-                settings:  { language: 'Langue', provider: 'Fournisseur API', model: 'Modele', apiKey: 'Cle API', save: 'Enregistrer et verifier' },
+                settings:  { language: 'Langue', provider: 'Fournisseur API', model: 'Modele', apiKey: 'Cle API', save: 'Enregistrer et verifier', saveKey: 'Enregistrer la cle API', disclaimer: 'La cle API est stockee dans votre navigateur. Lauteur decline toute responsabilite en cas de fuite.' },
                 status:    { notConfigured: 'Non configure', verifying: 'Verification...', connected: 'Connecte', invalidKey: 'Cle API invalide', unreachable: 'Serveur inaccessible' },
                 msg:       { you: 'Vous', assistant: 'Assistant', system: 'Systeme' },
                 indicator: { chat: 'Mode discussion', code: 'Mode code' },
@@ -96,7 +97,7 @@ class Chatting {
                 welcome:   { title: 'Добро пожаловать в Chatting', desc: 'Укажите ваш API-ключ в настройках, выберите режим и начните общение с любым LLM-проваидером.' },
                 sidebar:   { modes: 'Режимы', settings: 'Настройки' },
                 mode:      { chat: 'Чат', code: 'Код' },
-                settings:  { language: 'Язык', provider: 'API-проваидер', model: 'Модель', apiKey: 'API-ключ', save: 'Сохранить и проверить' },
+                settings:  { language: 'Язык', provider: 'API-проваидер', model: 'Модель', apiKey: 'API-ключ', save: 'Сохранить и проверить', saveKey: 'Сохранять API-ключ', disclaimer: 'API-ключ хранится в вашем браузере. Автор не несет ответственности за утечки.' },
                 status:    { notConfigured: 'Не настроено', verifying: 'Проверка...', connected: 'Подключено', invalidKey: 'Неверный API-ключ', unreachable: 'Сервер недоступен' },
                 msg:       { you: 'Вы', assistant: 'Ассистент', system: 'Система' },
                 indicator: { chat: 'Режим чата', code: 'Режим кода' },
@@ -204,6 +205,7 @@ class Chatting {
             provider:       document.getElementById('provider'),
             model:          document.getElementById('model'),
             apiKey:         document.getElementById('apiKey'),
+            saveApiKey:     document.getElementById('saveApiKey'),
             saveBtn:        document.getElementById('saveSettings'),
             connStatus:     document.getElementById('connStatus'),
             connText:       document.querySelector('.conn-text'),
@@ -288,9 +290,13 @@ class Chatting {
         const lblProvider = document.getElementById('lblProvider');
         const lblModel = document.getElementById('lblModel');
         const lblApiKey = document.getElementById('lblApiKey');
+        const lblSaveKey = document.getElementById('lblSaveKey');
+        const disclaimerSaveKey = document.getElementById('disclaimerSaveKey');
         if (lblProvider) lblProvider.textContent = t('settings.provider');
         if (lblModel) lblModel.textContent = t('settings.model');
         if (lblApiKey) lblApiKey.textContent = t('settings.apiKey');
+        if (lblSaveKey) lblSaveKey.textContent = t('settings.saveKey');
+        if (disclaimerSaveKey) disclaimerSaveKey.textContent = t('settings.disclaimer');
         this.el.saveBtn.textContent = t('settings.save');
 
         // Mode indicator
@@ -375,6 +381,7 @@ class Chatting {
     }
 
     _saveSettings() {
+        this.state.saveApiKey = this.el.saveApiKey ? this.el.saveApiKey.checked : true;
         this.state.provider = this.el.provider.value;
         this.state.model = this.el.model.value;
         this.state.apiKey = this.el.apiKey.value.trim();
@@ -390,22 +397,28 @@ class Chatting {
                 const s = JSON.parse(saved);
                 this.state.provider = s.provider || 'anthropic';
                 this.state.model = s.model || 'claude-sonnet-4-20250514';
-                this.state.apiKey = s.apiKey || '';
+                this.state.saveApiKey = s.saveApiKey !== false; // default true for legacy
+                this.state.apiKey = this.state.saveApiKey ? (s.apiKey || '') : '';
                 this.state.lang = s.lang || 'en';
             }
         } catch (e) { /* */ }
         this.el.apiKey.value = this.state.apiKey;
+        if (this.el.saveApiKey) this.el.saveApiKey.checked = this.state.saveApiKey;
         this.el.langSel.value = this.state.lang;
     }
 
     _persistSettings() {
         try {
-            localStorage.setItem('chatting-settings', JSON.stringify({
+            const data = {
                 provider: this.state.provider,
                 model: this.state.model,
-                apiKey: this.state.apiKey,
                 lang: this.state.lang,
-            }));
+                saveApiKey: this.state.saveApiKey,
+            };
+            if (this.state.saveApiKey) {
+                data.apiKey = this.state.apiKey;
+            }
+            localStorage.setItem('chatting-settings', JSON.stringify(data));
         } catch (e) { /* */ }
     }
 

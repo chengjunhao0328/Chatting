@@ -614,6 +614,40 @@ html, body {
     padding-right: 28px;
 }
 
+/* Checkbox (Save API Key) */
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.settings-disclaimer {
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    padding: 5px 0 0 21px;
+    opacity: 0.8;
+}
+
+.save-key-group {
+    margin-bottom: 4px;
+}
+
 /* Save Button */
 
 .save-btn {
